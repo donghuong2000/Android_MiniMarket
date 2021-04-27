@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">18110299</string>
+    <string name="sign_in">Sign in</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="or_sign_in_with">or sign in with</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google</string>
+    <string name="sign_up">Sign up</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
+</resources>
