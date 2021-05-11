@@ -11,26 +11,28 @@ import androidx.room.Update;
 import java.util.List;
 
 import hcmute.edu.vn.mssv18110299.data.User;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
 
 @Dao
 public interface UserDao {
 
     // insert user
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void AddUser(User user);
+    Completable AddUser(User user);
     // get all user
     @Query(value = "SELECT * FROM User ORDER BY Id")
-    List<User> GetAllUsers();
+    LiveData<List<User>> GetAllUsers();
     // get  user by id
     @Query(value = "SELECT * FROM User WHERE Id =:id")
-    User GetUser(int id);
+    LiveData<User> GetUser(int id);
     // get  user by Mail
     @Query(value = "SELECT * FROM User WHERE Email=:mail")
-    User GetUser(String mail);
+    Single<User> GetUser(String mail);
     // update user
     @Update
-    void updateUser(User... users);
+    Completable updateUser(User... users);
     // delete user
     @Delete
-    void DeleteUser(User user);
+    Completable DeleteUser(User user);
 }

@@ -9,7 +9,7 @@ import hcmute.edu.vn.mssv18110299.data.dao.UserDao;
 
 public class UserRepository {
 
-    private UserDao userDao;
+    public UserDao userDao;
 
     public UserRepository()
     {
@@ -18,7 +18,7 @@ public class UserRepository {
 
     public boolean Login(String email,String password){
         // check user
-        User user = userDao.GetUser(email);
+        User user = userDao.GetUser(email).blockingGet();
 
         if(user != null){
             //ton tai
@@ -35,7 +35,7 @@ public class UserRepository {
 
     public  boolean Register(User user){
         // check if exits
-        User u = userDao.GetUser(user.Email);
+        User u = userDao.GetUser(user.Email).blockingGet();
         if(u != null){ // ton tai user
             Log.d("RegisterStatus","User Exits");
             return false;

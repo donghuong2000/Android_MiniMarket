@@ -12,7 +12,10 @@ public class MiniMarketDatabaseApplication extends Application {
     public void onCreate(){
         super.onCreate();
         // when upgrading versions, kill the original tables by using fallbackToDestructiveMigration()
-        miniMarketDatabase = Room.databaseBuilder(this, MiniMarketDatabase.class,MiniMarketDatabase.NAME).fallbackToDestructiveMigration().build();
+        miniMarketDatabase = Room
+                .databaseBuilder(this, MiniMarketDatabase.class,MiniMarketDatabase.NAME)
+                .allowMainThreadQueries()
+                .fallbackToDestructiveMigration().build();
     }
     public static MiniMarketDatabase GetDatabase() {
         return  miniMarketDatabase;
