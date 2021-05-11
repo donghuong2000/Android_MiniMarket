@@ -20,10 +20,13 @@ public interface UserDao {
     void AddUser(User user);
     // get all user
     @Query(value = "SELECT * FROM User ORDER BY Id")
-    LiveData<List<User>> GetAllUsers();
+    List<User> GetAllUsers();
     // get  user by id
     @Query(value = "SELECT * FROM User WHERE Id =:id")
     User GetUser(int id);
+    // get  user by Mail
+    @Query(value = "SELECT * FROM User WHERE Email=:mail")
+    User GetUser(String mail);
     // update user
     @Update
     void updateUser(User... users);

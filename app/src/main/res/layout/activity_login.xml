@@ -79,6 +79,7 @@
             app:startIconContentDescription="Email">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
                 android:textSize="18sp"
@@ -99,6 +100,7 @@
             app:boxBackgroundColor="@color/input_background_color"
             app:startIconContentDescription="Email">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPassword"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:inputType="textPassword"
@@ -126,6 +128,7 @@
             android:fontFamily="@font/fredokaone_regular"
             android:text="@string/forgot_password" />
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:backgroundTint="@color/btn_color"
@@ -255,14 +258,14 @@
             android:layout_marginTop="5dp"
             android:fontFamily="@font/fredokaone_regular"
             android:text="@string/don_t_have_an_account" />
+
         <TextView
-            android:id="@+id/btnSignUp"
+            android:id="@+id/btnSignUpLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_marginHorizontal="5dp"
             android:layout_marginTop="5dp"
-            android:onClick="SignUp_Button_OnClick"
             android:fontFamily="@font/fredokaone_regular"
             android:text="@string/sign_up"
             android:textColor="@color/text_primary_color" />

@@ -14,7 +14,7 @@ import hcmute.edu.vn.mssv18110299.data.Item;
 public interface ItemDao {
     //get all
     @Query(value = "SELECT * FROM item LIMIT :PageSize OFFSET (:PageNum-1)*:PageSize")
-    LiveData<List<Item>> GetAllItems(int PageSize,int PageNum);
+    List<Item> GetAllItems(int PageSize,int PageNum);
     //Get
     @Query(value = "SELECT * FROM item WHERE Id = :id")
     Item GetItem(int id);

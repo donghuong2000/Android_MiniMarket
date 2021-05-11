@@ -118,6 +118,7 @@
                 app:startIconContentDescription="Email">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="74dp"
                     android:textColor="@color/black"
@@ -138,6 +139,7 @@
                 app:boxBackgroundColor="@color/input_background_color"
                 app:startIconContentDescription="Email">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtPassword"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:inputType="textPassword"
@@ -159,6 +161,7 @@
                 app:boxBackgroundColor="@color/input_background_color"
                 app:startIconContentDescription="Email">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtConfirmPassword"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:inputType="textPassword"
@@ -176,6 +179,7 @@
             android:orientation="vertical">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/btn_color"

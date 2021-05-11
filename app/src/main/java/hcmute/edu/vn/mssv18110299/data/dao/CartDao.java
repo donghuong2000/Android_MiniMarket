@@ -1,6 +1,7 @@
 package hcmute.edu.vn.mssv18110299.data.dao;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -11,7 +12,7 @@ import java.util.List;
 
 import hcmute.edu.vn.mssv18110299.data.Cart;
 
-
+@Dao
 public interface CartDao {
     // insert Cart
     @Insert(onConflict = OnConflictStrategy.IGNORE)

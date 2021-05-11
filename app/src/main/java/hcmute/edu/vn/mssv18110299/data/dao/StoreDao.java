@@ -20,7 +20,7 @@ public interface StoreDao {
     void AddStore(Store store);
     // get all Store
     @Query(value = "SELECT * FROM Store ORDER BY Id")
-    LiveData<List<Store>> GetAllStores();
+    List<Store> GetAllStores();
     // get Store by id
     @Query(value = "SELECT * FROM Store WHERE Id =:id")
     Store GetStore(int id);
