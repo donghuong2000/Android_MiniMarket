@@ -19,20 +19,20 @@ public interface UserDao {
 
     // insert user
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    Completable AddUser(User user);
+    void AddUser(User user);
     // get all user
     @Query(value = "SELECT * FROM User ORDER BY Id")
-    LiveData<List<User>> GetAllUsers();
+    List<User> GetAllUsers();
     // get  user by id
     @Query(value = "SELECT * FROM User WHERE Id =:id")
-    LiveData<User> GetUser(int id);
+    User GetUser(int id);
     // get  user by Mail
     @Query(value = "SELECT * FROM User WHERE Email=:mail")
     Single<User> GetUser(String mail);
     // update user
     @Update
-    Completable updateUser(User... users);
+    void updateUser(User... users);
     // delete user
     @Delete
-    Completable DeleteUser(User user);
+    void DeleteUser(User user);
 }

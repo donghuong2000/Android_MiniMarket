@@ -4,11 +4,8 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Store {
+public class Brand {
     @PrimaryKey(autoGenerate = true)
     public int Id;
     public String Name;
-    public float VotedScore;
-    public String ImgUrl;
-    public String Description;
 }

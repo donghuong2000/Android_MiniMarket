@@ -2,6 +2,7 @@ package hcmute.edu.vn.mssv18110299.data;
 
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 
 import hcmute.edu.vn.mssv18110299.utilities.DateConverter;
 
-@Entity()
+@Entity(foreignKeys = {@ForeignKey(entity = Role.class,parentColumns = "Id",childColumns = "RoleId")})
 public class User {
     @PrimaryKey(autoGenerate = true)
     public int Id;
@@ -21,7 +22,6 @@ public class User {
     public String PhoneNumber;
     public String Password;
     public String AvatarImageUrl;
-
-    public User(){
-    }
+    public boolean IsActive;
+    public int RoleId;
 }
