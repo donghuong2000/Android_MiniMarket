@@ -18,7 +18,7 @@ public class UserRepository {
 
     public boolean Login(String email,String password){
         // check user
-        User user = userDao.GetUser(email).blockingGet();
+        User user = userDao.GetUser(email);
 
         if(user != null){
             //ton tai
@@ -35,7 +35,7 @@ public class UserRepository {
 
     public  boolean Register(User user){
         // check if exits
-        User u = userDao.GetUser(user.Email).blockingGet();
+        User u = userDao.GetUser(user.Email);
         if(u != null){ // ton tai user
             Log.d("RegisterStatus","User Exits");
             return false;

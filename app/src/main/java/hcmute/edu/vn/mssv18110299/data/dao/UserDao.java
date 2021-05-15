@@ -28,7 +28,7 @@ public interface UserDao {
     User GetUser(int id);
     // get  user by Mail
     @Query(value = "SELECT * FROM User WHERE Email=:mail")
-    Single<User> GetUser(String mail);
+    User GetUser(String mail);
     // update user
     @Update
     void updateUser(User... users);

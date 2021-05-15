@@ -11,19 +11,53 @@
         android:layout_margin="8dp">
 
         <LinearLayout
-            android:layout_width="250dp"
+            android:layout_width="170dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <!-- Media -->
-            <ImageView
-                android:id="@+id/iamgeView"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="107dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/image_2"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-                />
+                <ImageView
+                    android:id="@+id/iamgeView"
+                    android:layout_width="match_parent"
+                    android:layout_height="107dp"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/image_2" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_rectangle_13"></ImageView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_star" />
+
+                    <TextView
+                        android:id="@+id/voteScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="7dp"
+                        android:text="5.0"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/input_background_color" />
+                </FrameLayout>
+
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,34 +90,6 @@
                         android:textColor="?android:attr/textColorSecondary" />
                 </LinearLayout>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@drawable/ic_rectangle_13"></ImageView>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="15dp"
-                        android:src="@drawable/ic_star" />
-
-                    <TextView
-                        android:id="@+id/voteScore"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="7dp"
-                        android:text="5.0"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="@color/input_background_color" />
-                </FrameLayout>
             </LinearLayout>
 
 

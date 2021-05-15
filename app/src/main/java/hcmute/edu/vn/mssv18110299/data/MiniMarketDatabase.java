@@ -34,7 +34,7 @@ public abstract class MiniMarketDatabase extends RoomDatabase {
     public abstract BillDao billDao();
     public abstract BillItemDao billItemDao();
     public abstract BrandDao brandDao();
-    public  abstract CartItemDao cartItemDao();
+    public abstract CartItemDao cartItemDao();
     public abstract CategoryDao categoryDao();
     public abstract ItemCategoryDao itemCategoryDao();
     public abstract RoleDao roleDao();
