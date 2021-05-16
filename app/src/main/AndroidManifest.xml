@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.18110299"
         >
-        <activity android:name="hcmute.edu.vn.mssv18110299.HomeActivity">
+        <activity android:name="hcmute.edu.vn.mssv18110299.CartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
