@@ -4,22 +4,22 @@
 
     >
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/menu_home"
         android:enabled="true"
         android:icon="@drawable/ic_home"
         android:title="Home"/>
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/menu_tracking"
         android:enabled="true"
         android:icon="@drawable/ic_order_tracking"
         android:title="Tracking"/>
     <item
-        android:id="@+id/page_3"
+        android:id="@+id/menu_notification"
         android:enabled="true"
         android:icon="@drawable/ic_bell"
         android:title="Notification"/>
     <item
-        android:id="@+id/page_4"
+        android:id="@+id/menu_profile"
         android:enabled="true"
         android:icon="@drawable/ic_vector"
         android:title="Profile"/>

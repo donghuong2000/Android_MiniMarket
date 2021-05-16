@@ -1,74 +1,84 @@
 package hcmute.edu.vn.mssv18110299;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
 import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.adapter.ItemAdapter;
 import hcmute.edu.vn.mssv18110299.adapter.StoreAdapter;
+import hcmute.edu.vn.mssv18110299.data.Category;
 import hcmute.edu.vn.mssv18110299.data.Item;
 import hcmute.edu.vn.mssv18110299.data.Store;
+import hcmute.edu.vn.mssv18110299.data.repository.CategoryRepository;
+import hcmute.edu.vn.mssv18110299.data.repository.ItemRepository;
+import hcmute.edu.vn.mssv18110299.data.repository.StoreRepository;
+import hcmute.edu.vn.mssv18110299.fragment.ViewPagerAdapter;
 
 public class HomeActivity extends AppCompatActivity {
-    private ArrayList<Store> stores;
-    private ArrayList<Item> items;
-    private RecyclerView recyclerStore;
-    private StoreAdapter storeAdapter;
-    private RecyclerView recyclerItem;
-    private ItemAdapter itemAdapter;
+
+    private CategoryRepository categoryRepository;
+    private TabLayout tabLayout;
+
+    private FloatingActionButton floatingActionButton;
+
+
+    private BottomNavigationView bottomNavigationView;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
-        //set recycle store
-        recyclerStore = findViewById(R.id.storeRecycle);
-        stores = new ArrayList<>();
-        CreateStoreList();
-        storeAdapter = new StoreAdapter(this,stores);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerStore.setLayoutManager(llm);
-        recyclerStore.setAdapter(storeAdapter);
-        //set recycle Item
-        recyclerItem = findViewById(R.id.itemRecycle);
-        items = new ArrayList<>();
-        CreateItemList();
-        itemAdapter = new ItemAdapter(this,items);
-        LinearLayoutManager llm2 = new LinearLayoutManager(this);
-        llm2.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerItem.setLayoutManager(llm2);
-        recyclerItem.setAdapter(itemAdapter);
-        // set toolbar action
-        ImageView toolbar = findViewById(R.id.btnSideBar);
 
+        categoryRepository = new CategoryRepository();
+        floatingActionButton = findViewById(R.id.floating_action_button);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        viewPager = findViewById(R.id.home_viewPager);
 
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
-
+        viewPager.setAdapter(viewPagerAdapter);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.menu_home:
+                    viewPager.setCurrentItem(0);
+                    break;
+                case R.id.menu_tracking:
+                    viewPager.setCurrentItem(1);
+                    break;
+                case R.id.menu_profile:
+                    viewPager.setCurrentItem(2);
+                    break;
+                case R.id.menu_notification:
+                    viewPager.setCurrentItem(3);
+                    break;
+            }
+            return true;
+        });
+        floatingActionButton.setOnClickListener(v-> viewPager.setCurrentItem(4) );
 
 
     }
-    private void CreateStoreList(){
-        stores.add(new Store("A",1,"A","A"));
-        stores.add(new Store("B",2,"B","B"));
-        stores.add(new Store("C",3,"C","C"));
-        stores.add(new Store("D",4,"D","D"));
-        stores.add(new Store("E",5,"E","E"));
-    }
-    private void CreateItemList(){
-        items.add(new Item("A",1,1,1,"A","A",1,1));
-        items.add(new Item("A",1,1,1,"A","A",1,1));
-        items.add(new Item("A",1,1,1,"A","A",1,1));
-        items.add(new Item("A",1,1,1,"A","A",1,1));
-        items.add(new Item("A",1,1,1,"A","A",1,1));
-    }
+
+
 }

@@ -1,6 +1,7 @@
 package hcmute.edu.vn.mssv18110299.data;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.room.Room;
 
@@ -15,7 +16,8 @@ public class MiniMarketDatabaseApplication extends Application {
         miniMarketDatabase = Room
                 .databaseBuilder(this, MiniMarketDatabase.class,MiniMarketDatabase.NAME)
                 .allowMainThreadQueries()
-                .fallbackToDestructiveMigration().build();
+                .fallbackToDestructiveMigration()
+                .build();
     }
     public static MiniMarketDatabase GetDatabase() {
         return  miniMarketDatabase;

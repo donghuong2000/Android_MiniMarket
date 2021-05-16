@@ -1,14 +1,18 @@
 package hcmute.edu.vn.mssv18110299.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
@@ -47,7 +51,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View smallCartItem = inflater.inflate(R.layout.small_card_item,parent,false);
+        smallCartItem.setOnClickListener(v->{
+            new MaterialAlertDialogBuilder(context,R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+                    .setTitle("Add to Cart")
+                    .setMessage("Do you want add this item in your Cart")
+                    .setNegativeButton("Cancel",((dialog, which) -> {
+                        //do
+                    }))
+                    .setPositiveButton("Add to Cart", (dialog, which) -> {
+                        //do
+                    })
+                    .show();
+        });
         ViewHolder viewHolder = new ViewHolder(smallCartItem);
+
         return  viewHolder;
     }
 
@@ -55,6 +72,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Item item = items.get(position);
         //ToDO load image for Recycle View
+
+        // add event
         holder.name.setText(item.getName());
         holder.voteScore.setText(String.valueOf(item.getVotedScore()));
         holder.location.setText("1");

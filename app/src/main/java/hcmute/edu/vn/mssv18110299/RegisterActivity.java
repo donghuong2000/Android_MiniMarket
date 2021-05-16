@@ -18,6 +18,7 @@ import java.lang.ref.WeakReference;
 
 import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.data.User;
+import hcmute.edu.vn.mssv18110299.data.model.ResponseModel;
 import hcmute.edu.vn.mssv18110299.data.repository.UserRepository;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -39,32 +40,18 @@ public class RegisterActivity extends AppCompatActivity {
         confirmPassword = findViewById(R.id.txtConfirmPassword);
         signIn = findViewById(R.id.btnSignUp);
         camera.setOnClickListener(v-> dispatchTakePictureIntent());
-        signIn.setOnClickListener(v-> {
-            if(Validate()) {
-                User user = new User();
-                user.Email = username.getText().toString();
-                user.Password = password.getText().toString();
-                new Register(this,user).execute();
-            }
-        });
-
-
-
-
+        signIn.setOnClickListener(v-> Validate());
     }
-    private boolean Validate() {
-        String cp,p;
-        p = password.getText().toString();
-        cp = confirmPassword.getText().toString();
-        if(!p.equals(cp))
-            return  false;// display Error TODO
-        if(username.getText().toString().length()<5)
-            return false;
-        if(password.getText().toString().length()<5)
-            return false;
-
-        return true;
-
+    private void Validate() {
+        ResponseModel response = userRepository.Register(username.getText().toString(),password.getText().toString(),confirmPassword.getText().toString());
+        if(response.isSuccess)
+        {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(this,response.message,Toast.LENGTH_LONG).show();
+        }
     }
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -85,34 +72,5 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
     }
-    private static class Register extends AsyncTask<Void,Void,Boolean> {
 
-
-        private WeakReference<RegisterActivity> activityReference;
-        private User user;
-        // only retain a weak reference to the activity
-        Register(RegisterActivity context, User user) {
-            activityReference = new WeakReference<>(context);
-            this.user = user;
-        }
-
-        // doInBackground methods runs on a worker thread
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-            boolean success = activityReference.get().userRepository.Register(user);
-            return  success;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-            // intent home Page If Success TODO
-            if(aBoolean){
-                Toast.makeText(activityReference.get(),"Dang ki thanh cong",Toast.LENGTH_LONG).show();
-            }
-            else {
-                Toast.makeText(activityReference.get(), "Dang ki that bai", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 }
