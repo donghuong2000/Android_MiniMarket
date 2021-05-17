@@ -55,7 +55,6 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="0dp"
             android:background="#F2FAF4"
-
             app:elevation="@dimen/cardview_compat_inset_shadow"
             app:menu="@menu/bottom_navigation_menu" />
 

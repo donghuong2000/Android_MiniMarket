@@ -24,7 +24,7 @@ public interface CartItemDao {
     List<CartItem> GetAllBrands();
 
     @Query(value = "SELECT * FROM CartItem WHERE CartId =:CartId")
-    CartItem GetCartItem(int CartId);
+    List<CartItem> GetCartItemsById(int CartId);
 
     @Update
     void updateCartItem(CartItem... CartItem);

@@ -18,6 +18,7 @@ import hcmute.edu.vn.mssv18110299.data.dao.UserDao;
 import hcmute.edu.vn.mssv18110299.data.model.ResponseModel;
 import hcmute.edu.vn.mssv18110299.data.repository.RoleRepository;
 import hcmute.edu.vn.mssv18110299.data.repository.UserRepository;
+import hcmute.edu.vn.mssv18110299.utilities.Session;
 import io.reactivex.rxjava3.core.Single;
 
 public class  MainActivity extends AppCompatActivity {
@@ -54,6 +55,7 @@ public class  MainActivity extends AppCompatActivity {
         ResponseModel response = userRepository.Login(username.getText().toString(),password.getText().toString());
         if(response.isSuccess)
         {
+            new Session(this).setUsername(username.getText().toString());
             // redirect to Home Page
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);

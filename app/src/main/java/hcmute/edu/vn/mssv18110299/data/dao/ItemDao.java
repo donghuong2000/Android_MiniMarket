@@ -15,6 +15,9 @@ public interface ItemDao {
     //get all
     @Query(value = "SELECT * FROM item ")
     List<Item> GetAllItems();
+
+    @Query(value = "SELECT * FROM item WHERE StoreId=:id ")
+    List<Item> GetAllItemsById(int id);
     //Get
     @Query(value = "SELECT * FROM item WHERE Id = :id")
     Item GetItem(int id);

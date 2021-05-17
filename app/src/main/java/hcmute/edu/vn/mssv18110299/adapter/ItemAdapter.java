@@ -17,8 +17,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 
 import hcmute.edu.vn.mssv18110299.R;
+import hcmute.edu.vn.mssv18110299.data.CartItem;
 import hcmute.edu.vn.mssv18110299.data.Item;
 import hcmute.edu.vn.mssv18110299.data.Store;
+import hcmute.edu.vn.mssv18110299.data.repository.CartRepository;
+import hcmute.edu.vn.mssv18110299.utilities.Session;
 
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
@@ -51,18 +54,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View smallCartItem = inflater.inflate(R.layout.small_card_item,parent,false);
-        smallCartItem.setOnClickListener(v->{
-            new MaterialAlertDialogBuilder(context,R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
-                    .setTitle("Add to Cart")
-                    .setMessage("Do you want add this item in your Cart")
-                    .setNegativeButton("Cancel",((dialog, which) -> {
-                        //do
-                    }))
-                    .setPositiveButton("Add to Cart", (dialog, which) -> {
-                        //do
-                    })
-                    .show();
-        });
+
         ViewHolder viewHolder = new ViewHolder(smallCartItem);
 
         return  viewHolder;
@@ -77,6 +69,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         holder.name.setText(item.getName());
         holder.voteScore.setText(String.valueOf(item.getVotedScore()));
         holder.location.setText("1");
+        holder.itemView.setOnClickListener(v-> new MaterialAlertDialogBuilder(context,R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+                .setTitle("Add to Cart")
+                .setMessage("Do you want add this item in your Cart")
+                .setNegativeButton("Cancel",((dialog, which) -> {
+                    //do
+                }))
+                .setPositiveButton("Add to Cart", (dialog, which) -> {
+                    String username = new Session(context).getUsername();
+                    Toast.makeText(context,username,Toast.LENGTH_LONG).show();
+                })
+                .show());
     }
 
     @Override

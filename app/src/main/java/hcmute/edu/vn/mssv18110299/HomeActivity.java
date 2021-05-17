@@ -31,24 +31,24 @@ import hcmute.edu.vn.mssv18110299.data.repository.CategoryRepository;
 import hcmute.edu.vn.mssv18110299.data.repository.ItemRepository;
 import hcmute.edu.vn.mssv18110299.data.repository.StoreRepository;
 import hcmute.edu.vn.mssv18110299.fragment.ViewPagerAdapter;
+import hcmute.edu.vn.mssv18110299.utilities.Session;
 
 public class HomeActivity extends AppCompatActivity {
 
     private CategoryRepository categoryRepository;
     private TabLayout tabLayout;
-
     private FloatingActionButton floatingActionButton;
-
-
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
 
+    private Session session;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
-
+        session = new Session(this);
+        session.checkLogging();
         categoryRepository = new CategoryRepository();
         floatingActionButton = findViewById(R.id.floating_action_button);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -67,15 +67,15 @@ public class HomeActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(1);
                     break;
                 case R.id.menu_profile:
-                    viewPager.setCurrentItem(2);
+                    viewPager.setCurrentItem(3);
                     break;
                 case R.id.menu_notification:
-                    viewPager.setCurrentItem(3);
+                    viewPager.setCurrentItem(2);
                     break;
             }
             return true;
         });
-        floatingActionButton.setOnClickListener(v-> viewPager.setCurrentItem(4) );
+        floatingActionButton.setOnClickListener(v-> viewPager.setCurrentItem(4));
 
 
     }

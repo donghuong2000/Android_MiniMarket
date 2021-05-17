@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.GenericLifecycleObserver;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +18,9 @@ import java.util.ArrayList;
 
 import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.data.Store;
+import hcmute.edu.vn.mssv18110299.data.repository.ItemRepository;
+import hcmute.edu.vn.mssv18110299.data.repository.StoreRepository;
+import hcmute.edu.vn.mssv18110299.fragment.StoreFragment;
 
 public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> {
 
@@ -59,6 +65,12 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         holder.name.setText(store.getName());
         holder.voteScore.setText(String.valueOf(store.getVotedScore()));
         holder.location.setText("1");
+        holder.itemView.setOnClickListener(v->{
+            AppCompatActivity appCompatActivity =(AppCompatActivity)v.getContext();
+            store.setItems(new StoreRepository().GetItemsAll(store.getId()));
+            StoreFragment storeFragment = new StoreFragment(store);
+            appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.replace,storeFragment).addToBackStack(null).commit();
+        });
 
     }
 

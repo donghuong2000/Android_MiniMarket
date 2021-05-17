@@ -23,8 +23,10 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 return new NotificationFragment();
             case 3:
                 return new ProfileFragment();
-            default:
+            case 4:
                 return new CartFragment();
+            default:
+                return new StoreFragment();
         }
 
     }

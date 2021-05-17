@@ -20,6 +20,7 @@ import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.data.User;
 import hcmute.edu.vn.mssv18110299.data.model.ResponseModel;
 import hcmute.edu.vn.mssv18110299.data.repository.UserRepository;
+import hcmute.edu.vn.mssv18110299.utilities.Session;
 
 public class RegisterActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -28,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     ImageView camera;
     EditText username,password,confirmPassword;
     Button signIn;
+    Session session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +43,13 @@ public class RegisterActivity extends AppCompatActivity {
         signIn = findViewById(R.id.btnSignUp);
         camera.setOnClickListener(v-> dispatchTakePictureIntent());
         signIn.setOnClickListener(v-> Validate());
+        session = new Session(this);
     }
     private void Validate() {
         ResponseModel response = userRepository.Register(username.getText().toString(),password.getText().toString(),confirmPassword.getText().toString());
         if(response.isSuccess)
         {
+            session.setUsername(username.getText().toString());
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         }

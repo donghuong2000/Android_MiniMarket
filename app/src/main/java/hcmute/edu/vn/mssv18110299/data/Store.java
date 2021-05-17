@@ -1,7 +1,10 @@
 package hcmute.edu.vn.mssv18110299.data;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.List;
 
 @Entity
 public class Store {
@@ -11,6 +14,8 @@ public class Store {
     private float VotedScore;
     private String ImgUrl;
     private String Description;
+    @Ignore
+    private List<Item> Items;
 
     public Store(String Name,float VotedScore,String ImgUrl,String Description)
     {
@@ -59,5 +64,13 @@ public class Store {
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+    public List<Item> getItems() {
+        return Items;
+    }
+
+    public void setItems(List<Item> items) {
+        Items = items;
     }
 }
