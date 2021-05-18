@@ -34,6 +34,10 @@
         <activity android:name="hcmute.edu.vn.mssv18110299.ForgotPasswordConfirmActivity">
 
         </activity>
+        <activity android:name="hcmute.edu.vn.mssv18110299.HomeActivity">
+
+        </activity>
+
 
     </application>
 

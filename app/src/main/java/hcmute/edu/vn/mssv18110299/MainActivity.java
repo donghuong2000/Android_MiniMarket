@@ -3,23 +3,30 @@ package hcmute.edu.vn.mssv18110299;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.ref.WeakReference;
+import java.util.concurrent.atomic.AtomicReference;
 
+import hcmute.edu.vn.mssv18110299.data.User;
+import hcmute.edu.vn.mssv18110299.data.dao.UserDao;
+import hcmute.edu.vn.mssv18110299.data.model.ResponseModel;
+import hcmute.edu.vn.mssv18110299.data.repository.RoleRepository;
 import hcmute.edu.vn.mssv18110299.data.repository.UserRepository;
+import hcmute.edu.vn.mssv18110299.utilities.Session;
+import io.reactivex.rxjava3.core.Single;
 
 public class  MainActivity extends AppCompatActivity {
 
     UserRepository userRepository;
     TextView ForgotPasswordBtn;
     EditText username,password;
+    RoleRepository roleRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,58 +37,32 @@ public class  MainActivity extends AppCompatActivity {
         username = findViewById(R.id.txtEmail);
         password = findViewById(R.id.txtPassword);
         TextView btnSignUp = findViewById(R.id.btnSignUpLogin);
-        btnSignIn.setOnClickListener(x->{
-            new Login(this,username.getText().toString(),password.getText().toString()).execute();
-        });
+
+        btnSignIn.setOnClickListener(v-> Validate());
         btnSignUp.setOnClickListener(v-> {
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
         });
     }
-
     public void Forgot_Button_OnClick(View v){
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
-    public void SignUp_Button_OnClick(View v){
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+
+
+
+    private void Validate(){
+        ResponseModel response = userRepository.Login(username.getText().toString(),password.getText().toString());
+        if(response.isSuccess)
+        {
+            new Session(this).setUsername(username.getText().toString());
+            // redirect to Home Page
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(this,response.message,Toast.LENGTH_LONG).show();
+        }
     }
-    private void DisplayText(boolean aBoolean)
-    {
-
-    }
-    private static class Login extends AsyncTask<Void,Void,Boolean> {
-
-
-        private WeakReference<MainActivity> activityReference;
-        private String Username;
-        private String Password;
-        // only retain a weak reference to the activity
-        Login(MainActivity context, String username,String password) {
-            activityReference = new WeakReference<>(context);
-            Username = username;
-            Password = password;
-        }
-
-        // doInBackground methods runs on a worker thread
-        @Override
-        protected Boolean doInBackground(Void... objs) {
-            boolean success =   activityReference.get().userRepository.Login(Username,Password);
-           return  success;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-            // intent home Page If Success TODO
-            if(aBoolean){
-                Toast.makeText(activityReference.get(),"oke thanh cong",Toast.LENGTH_LONG).show();
-            }
-            else {
-                Toast.makeText(activityReference.get(), "oke that bai cmnr thanh cong", Toast.LENGTH_LONG).show();
-            }
-            }
-        }
 }
 

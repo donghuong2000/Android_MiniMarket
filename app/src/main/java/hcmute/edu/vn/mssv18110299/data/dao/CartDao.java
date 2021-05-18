@@ -19,7 +19,7 @@ public interface CartDao {
     void AddCart(Cart cart);
     // get all Cart
     @Query(value = "SELECT * FROM Cart ORDER BY Id")
-    LiveData<List<Cart>> GetAllCarts();
+    List<Cart> GetAllCarts();
     // get Cart by id
     @Query(value = "SELECT * FROM Cart WHERE Id =:id")
     Cart GetCart(int id);

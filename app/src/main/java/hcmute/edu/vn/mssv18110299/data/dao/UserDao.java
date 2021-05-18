@@ -11,6 +11,8 @@ import androidx.room.Update;
 import java.util.List;
 
 import hcmute.edu.vn.mssv18110299.data.User;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
 
 @Dao
 public interface UserDao {
