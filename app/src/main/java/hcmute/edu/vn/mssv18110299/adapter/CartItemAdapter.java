@@ -12,11 +12,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.util.ArrayList;
 
 import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.data.CartItem;
 import hcmute.edu.vn.mssv18110299.data.repository.CartRepository;
+import hcmute.edu.vn.mssv18110299.utilities.Session;
 
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHolder> {
 
@@ -67,9 +70,32 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
          //TODO load image
          holder.btnMinus.setOnClickListener(v->{
              CartItem ci = cartItems.get(position);
-             ci.setNum(ci.getNum()-1);
-             new CartRepository().updateCart(ci);
-             this.notifyDataSetChanged();
+
+
+             int number = ci.getNum()-1;
+             if(number<1){
+                 //remove cart
+                 //alert
+                 new MaterialAlertDialogBuilder(context,R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+                         .setTitle("Remove this item from cart")
+                         .setMessage("Do you want remove this item from your Cart")
+                         .setNegativeButton("Cancel",((dialog, which) -> {
+                             //do nothing
+                         }))
+                         .setPositiveButton("Remove", (dialog, which) -> {
+                             cartItems.remove(position);
+                             new CartRepository().deleteFromCart(ci);
+                             this.notifyItemRemoved(position);
+                             this.notifyItemRangeChanged(position, cartItems.size());
+                         })
+                         .show();
+             }
+             else {
+                 ci.setNum(number);
+                 new CartRepository().updateCart(ci);
+                 this.notifyDataSetChanged();
+             }
+
          });
          holder.btnPlus.setOnClickListener(v->{
              CartItem ci = cartItems.get(position);

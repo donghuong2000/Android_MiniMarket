@@ -20,6 +20,7 @@ import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.data.CartItem;
 import hcmute.edu.vn.mssv18110299.data.Item;
 import hcmute.edu.vn.mssv18110299.data.Store;
+import hcmute.edu.vn.mssv18110299.data.model.ResponseModel;
 import hcmute.edu.vn.mssv18110299.data.repository.CartRepository;
 import hcmute.edu.vn.mssv18110299.utilities.Session;
 
@@ -76,8 +77,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                     //do
                 }))
                 .setPositiveButton("Add to Cart", (dialog, which) -> {
-                    String username = new Session(context).getUsername();
-                    Toast.makeText(context,username,Toast.LENGTH_LONG).show();
+                    //addToCart
+                    String username =  new Session(context).getUsername();
+                    ResponseModel md =  new CartRepository().addToCart(username,item);
+                    Toast.makeText(context,md.message,Toast.LENGTH_SHORT).show();
                 })
                 .show());
     }

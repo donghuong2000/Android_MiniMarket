@@ -5,6 +5,7 @@ import java.util.List;
 
 import hcmute.edu.vn.mssv18110299.data.Cart;
 import hcmute.edu.vn.mssv18110299.data.CartItem;
+import hcmute.edu.vn.mssv18110299.data.Item;
 import hcmute.edu.vn.mssv18110299.data.MiniMarketDatabase;
 import hcmute.edu.vn.mssv18110299.data.MiniMarketDatabaseApplication;
 import hcmute.edu.vn.mssv18110299.data.User;
@@ -38,6 +39,18 @@ public class CartRepository {
     {
         try {
             db.cartItemDao().AddCartItem(cartItem);
+            return new ResponseModel(true,"Add to Cart Success");
+        }
+        catch (Exception ex){
+            return new ResponseModel(false,ex.getMessage());
+        }
+
+    }
+    public ResponseModel addToCart(String userName, Item item)
+    {
+        try {
+           int userid = db.userDao().GetUser(userName).getId();
+           db.cartItemDao().AddCartItem(new CartItem(item.getId(),userid,1));
             return new ResponseModel(true,"Add to Cart Success");
         }
         catch (Exception ex){

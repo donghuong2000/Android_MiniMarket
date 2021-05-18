@@ -60,18 +60,15 @@
             android:textColor="@color/text_primary_color"
             android:fontFamily="@font/fredokaone_regular"
             android:textSize="11sp"/>
-        <FrameLayout
+
+        <TextView
+            android:id="@+id/item_price"
             android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/btn_item_plus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_plus"
-                android:layout_gravity="center_vertical|end">
-            </ImageView>
-        </FrameLayout>
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fredokaone_regular"
+            android:text="7.5 $"
+            android:textColor="@color/text_primary_color"
+            android:textSize="24sp" />
 
     </LinearLayout>
     <LinearLayout
@@ -79,14 +76,13 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_weight="1">
-        <TextView
-            android:id="@+id/item_price"
+
+        <ImageView
+            android:id="@+id/btn_item_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="7.5 $"
-            android:fontFamily="@font/fredokaone_regular"
-            android:textSize="24sp"
-            android:textColor="@color/text_primary_color"/>
+            android:layout_gravity="center_vertical|end"
+            android:src="@drawable/ic_plus"/>
 
     </LinearLayout>
 </LinearLayout>

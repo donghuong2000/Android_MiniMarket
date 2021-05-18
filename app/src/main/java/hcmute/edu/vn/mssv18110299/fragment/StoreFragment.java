@@ -3,13 +3,18 @@ package hcmute.edu.vn.mssv18110299.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import hcmute.edu.vn.mssv18110299.R;
+import hcmute.edu.vn.mssv18110299.adapter.StoreItemAdapter;
 import hcmute.edu.vn.mssv18110299.data.Store;
 
 /**
@@ -28,6 +33,8 @@ public class StoreFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Store store;
+    private StoreItemAdapter storeItemAdapter;
+    private RecyclerView recyclerView;
     public StoreFragment() {
         // Required empty public constructor
     }
@@ -70,6 +77,11 @@ public class StoreFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_store, container, false);
         TextView teview= view.findViewById(R.id.store_name);
         teview.setText(store.getName());
+        recyclerView = view.findViewById(R.id.recycle_store_item);
+        storeItemAdapter = new StoreItemAdapter(getContext(),new ArrayList<>(store.getItems()));
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(llm);
+        recyclerView.setAdapter(storeItemAdapter);
         return view;
     }
 }

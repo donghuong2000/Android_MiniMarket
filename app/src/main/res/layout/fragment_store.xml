@@ -27,30 +27,11 @@
         android:textColor="@color/text_primary_color"
         android:fontFamily="@font/fredokaone_regular"
         android:gravity="center"/>
-    <com.google.android.material.tabs.TabLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_store_item"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="3.2">
 
-        android:layout_weight="0.2">
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="Items">
-
-        </com.google.android.material.tabs.TabItem>
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Store Info">
-
-        </com.google.android.material.tabs.TabItem>
-
-
-    </com.google.android.material.tabs.TabLayout>
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3.5">
-    </androidx.viewpager.widget.ViewPager>
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
