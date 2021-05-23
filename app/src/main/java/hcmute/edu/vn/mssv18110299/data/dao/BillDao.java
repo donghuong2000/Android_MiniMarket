@@ -24,6 +24,9 @@ public interface  BillDao {
     // get Bill by id
     @Query(value = "SELECT * FROM Bill WHERE Id =:id")
     Bill GetBill(int id);
+
+    @Query(value = "SELECT * FROM Bill WHERE UserId =:id")
+    List<Bill> GetBillByUserId(int id);
     // Bill Bill
     @Update
     void updateBill(Bill... Bill);
