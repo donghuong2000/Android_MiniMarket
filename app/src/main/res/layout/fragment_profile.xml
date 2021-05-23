@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:layout_margin="10dp"
     tools:context=".fragment.ProfileFragment">
 
     <ScrollView
@@ -32,7 +33,7 @@
                         android:layout_gravity="center">
 
                         <ImageView
-                            android:id="@+id/avatar"
+                            android:id="@+id/profile_avatar"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
                             android:src="@drawable/avatar"
@@ -54,6 +55,7 @@
             </FrameLayout>
 
             <TextView
+                android:id="@+id/profile_display_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nguyen Dong Huong"
@@ -195,7 +197,6 @@
                 android:textAllCaps="false"
                 android:elevation="5dp"
                 app:cornerRadius="8dp">
-
             </com.google.android.material.button.MaterialButton>
         </LinearLayout>
     </ScrollView>

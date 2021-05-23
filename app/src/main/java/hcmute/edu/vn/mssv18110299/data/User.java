@@ -25,6 +25,12 @@ public class User {
     private boolean IsActive;
     private int RoleId;
 
+    public User(String email, String password, String avatarImageUrl, int roleId) {
+        Email = email;
+        Password = password;
+        AvatarImageUrl = avatarImageUrl;
+        RoleId = roleId;
+    }
 
     public User() {
     }

@@ -1,14 +1,17 @@
 package hcmute.edu.vn.mssv18110299.data.repository;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import hcmute.edu.vn.mssv18110299.RegisterActivity;
 import hcmute.edu.vn.mssv18110299.data.MiniMarketDatabaseApplication;
 import hcmute.edu.vn.mssv18110299.data.User;
 import hcmute.edu.vn.mssv18110299.data.dao.UserDao;
 import hcmute.edu.vn.mssv18110299.data.model.ResponseModel;
 import hcmute.edu.vn.mssv18110299.utilities.Constants;
+import hcmute.edu.vn.mssv18110299.utilities.ImageSaver;
 
 public class UserRepository {
 
@@ -16,6 +19,7 @@ public class UserRepository {
 
     public UserRepository() {
         userDao = MiniMarketDatabaseApplication.GetDatabase().userDao();
+
     }
 
     public ResponseModel Login(String email, String password){
@@ -35,9 +39,9 @@ public class UserRepository {
         }
     }
 
-    public  ResponseModel Register(String email,String password,String comparePassword){
+    public  ResponseModel Register(String email, String password, String comparePassword,String bitmap){
         // validate input
-        if(email.isEmpty() || password.isEmpty() || comparePassword.isEmpty() )
+        if(email.isEmpty() || password.isEmpty() || comparePassword.isEmpty() || bitmap.isEmpty())
             return new ResponseModel(false, "input cannot be empty");
         // compare password
         if(!password.equals(comparePassword))
@@ -49,12 +53,14 @@ public class UserRepository {
             return new ResponseModel(false,"User already exists");
         }
 
-        userDao.AddUser(new User(email,password, Constants.User));
+        userDao.AddUser(new User(email,password,bitmap, Constants.User));
         return new ResponseModel(true,"Add user success");
 
     }
 
-
+    public User GetUser(String username){
+        return userDao.GetUser(username);
+    }
 
 
 }

@@ -40,7 +40,7 @@ public class BillItemAdapter extends RecyclerView.Adapter<BillItemAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder( @NotNull ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            View order_item = inflater.inflate(R.layout.view_store_item,parent,false);
+            View order_item = inflater.inflate(R.layout.view_order_item,parent,false);
             ViewHolder viewHolder = new ViewHolder(order_item);
             return viewHolder;
     }
@@ -48,7 +48,7 @@ public class BillItemAdapter extends RecyclerView.Adapter<BillItemAdapter.ViewHo
     @Override
     public void onBindViewHolder( @NotNull BillItemAdapter.ViewHolder holder, int position) {
             Bill item = bills.get(position);
-            holder.orderId.setText(item.Id);
+            holder.orderId.setText(String.valueOf(item.Id));
             holder.dateCreate.setText(item.DateCreate.toString());
             holder.totalPrice.setText(String.valueOf(item.Total));
     }

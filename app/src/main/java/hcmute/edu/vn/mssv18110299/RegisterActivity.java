@@ -20,6 +20,7 @@ import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.data.User;
 import hcmute.edu.vn.mssv18110299.data.model.ResponseModel;
 import hcmute.edu.vn.mssv18110299.data.repository.UserRepository;
+import hcmute.edu.vn.mssv18110299.utilities.ImageSaver;
 import hcmute.edu.vn.mssv18110299.utilities.Session;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -30,6 +31,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText username,password,confirmPassword;
     Button signIn;
     Session session;
+    ImageSaver imageSaver;
+    Bitmap avatarBitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +47,16 @@ public class RegisterActivity extends AppCompatActivity {
         camera.setOnClickListener(v-> dispatchTakePictureIntent());
         signIn.setOnClickListener(v-> Validate());
         session = new Session(this);
+        imageSaver = new ImageSaver(this);
+        avatarBitmap = null;
     }
     private void Validate() {
-        ResponseModel response = userRepository.Register(username.getText().toString(),password.getText().toString(),confirmPassword.getText().toString());
+        String avatarImage = "";
+        if(avatarBitmap!=null){
+            imageSaver.save(avatarBitmap,username.getText().toString());
+            avatarImage = username.getText().toString();
+        }
+        ResponseModel response = userRepository.Register(username.getText().toString(),password.getText().toString(),confirmPassword.getText().toString(),avatarImage);
         if(response.isSuccess)
         {
             session.setUsername(username.getText().toString());
@@ -71,8 +81,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            avatar.setImageBitmap(imageBitmap);
+            avatarBitmap = (Bitmap) extras.get("data");
+            avatar.setImageBitmap(avatarBitmap);
         }
 
     }
