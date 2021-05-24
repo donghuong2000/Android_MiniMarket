@@ -44,7 +44,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <ImageView
-                    android:id="@+id/camera"
+                    android:id="@+id/profile_camera"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
@@ -187,7 +187,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSignUp"
+                android:id="@+id/profile_update"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/btn_color"

@@ -62,5 +62,13 @@ public class UserRepository {
         return userDao.GetUser(username);
     }
 
-
+    public ResponseModel UpdateUser(User user){
+        try {
+            userDao.updateUser(user);
+            return new ResponseModel(true,"Update user info success");
+        }
+        catch (Exception ex){
+            return new ResponseModel(false,ex.getMessage());
+        }
+    }
 }
