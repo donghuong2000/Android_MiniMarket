@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.adapter.StoreItemAdapter;
 import hcmute.edu.vn.mssv18110299.data.Store;
+import hcmute.edu.vn.mssv18110299.utilities.ImageSaver;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +78,8 @@ public class StoreFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_store, container, false);
         TextView teview= view.findViewById(R.id.store_name);
+        ImageView image=  view.findViewById(R.id.image_shop);
+        image.setImageBitmap(new ImageSaver(getContext()).load(store.getImgUrl()));
         teview.setText(store.getName());
         recyclerView = view.findViewById(R.id.recycle_store_item);
         storeItemAdapter = new StoreItemAdapter(getContext(),new ArrayList<>(store.getItems()));

@@ -22,7 +22,7 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/iamgeView"
+                    android:id="@+id/item_card_image"
                     android:layout_width="match_parent"
                     android:layout_height="107dp"
                     android:scaleType="centerCrop"
@@ -34,10 +34,11 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp">
                     <ImageView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/ic_rectangle_13"></ImageView>
+                        android:background="@drawable/ic_rectangle_13"/>
 
                     <ImageView
                         android:layout_width="wrap_content"

@@ -16,17 +16,12 @@ import java.io.IOException;
 public class ImageSaver {
 
     private String directoryName = "images";
-    private String fileName = ".png";
+
     private Context context;
     private boolean external;
 
     public ImageSaver(Context context) {
         this.context = context;
-    }
-
-    public ImageSaver setFileName(String fileName) {
-        this.fileName = fileName;
-        return this;
     }
 
     public ImageSaver setExternal(boolean external) {
@@ -42,7 +37,7 @@ public class ImageSaver {
     public void save(Bitmap bitmapImage,String fileName) {
         FileOutputStream fileOutputStream = null;
         try {
-            fileOutputStream = new FileOutputStream(createFile(fileName+".png"));
+            fileOutputStream = new FileOutputStream(createFile(fileName));
             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,7 +87,7 @@ public class ImageSaver {
     public Bitmap load(String fileName) {
         FileInputStream inputStream = null;
         try {
-            inputStream = new FileInputStream(createFile(fileName+".png"));
+            inputStream = new FileInputStream(createFile(fileName));
             return BitmapFactory.decodeStream(inputStream);
         } catch (Exception e) {
             e.printStackTrace();

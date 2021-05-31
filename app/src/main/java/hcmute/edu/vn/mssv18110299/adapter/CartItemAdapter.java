@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.data.CartItem;
 import hcmute.edu.vn.mssv18110299.data.repository.CartRepository;
+import hcmute.edu.vn.mssv18110299.utilities.ImageSaver;
 import hcmute.edu.vn.mssv18110299.utilities.Session;
 
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHolder> {
@@ -67,7 +68,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
          CartItem cartItem = cartItems.get(position);
          holder.itemName.setText(cartItem.getItem().getName());
          holder.itemNum.setText(String.valueOf(cartItem.getNum()));
-         //TODO load image
+         holder.itemImage.setImageBitmap(new ImageSaver(context).load(cartItem.getItem().getImgUrl()));
          holder.btnMinus.setOnClickListener(v->{
              CartItem ci = cartItems.get(position);
 

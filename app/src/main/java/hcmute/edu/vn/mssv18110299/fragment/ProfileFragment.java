@@ -110,7 +110,7 @@ public class ProfileFragment extends Fragment {
         profile_name.setText(user.getName());
         profile_phone.setText(user.getPhoneNumber());
         update_profile_btn.setOnClickListener(v->Update_Profile());
-        profile_avatar.setImageBitmap(imageSaver.load(user.getEmail()));
+        profile_avatar.setImageBitmap(imageSaver.load(user.getEmail()+".png"));
         profile_camera.setOnClickListener(v-> dispatchTakePictureIntent());
         return view;
     }
