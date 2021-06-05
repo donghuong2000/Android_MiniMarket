@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import hcmute.edu.vn.mssv18110299.RegisterActivity;
+import hcmute.edu.vn.mssv18110299.data.Cart;
+import hcmute.edu.vn.mssv18110299.data.MiniMarketDatabase;
 import hcmute.edu.vn.mssv18110299.data.MiniMarketDatabaseApplication;
 import hcmute.edu.vn.mssv18110299.data.User;
 import hcmute.edu.vn.mssv18110299.data.dao.UserDao;
@@ -15,16 +17,16 @@ import hcmute.edu.vn.mssv18110299.utilities.ImageSaver;
 
 public class UserRepository {
 
-    private UserDao userDao;
+    private MiniMarketDatabase Dao;
 
     public UserRepository() {
-        userDao = MiniMarketDatabaseApplication.GetDatabase().userDao();
+         Dao = MiniMarketDatabaseApplication.GetDatabase();
 
     }
 
     public ResponseModel Login(String email, String password){
         // check user
-        User user = userDao.GetUser(email);
+        User user = Dao.userDao().GetUser(email);
 
         if(user != null){
             //ton tai
@@ -47,24 +49,26 @@ public class UserRepository {
         if(!password.equals(comparePassword))
             return new ResponseModel(false, "passwords don't match");
         // check if exits
-        User user = userDao.GetUser(email);
+        User user = Dao.userDao().GetUser(email);
         if(user != null){
             // ton tai user
             return new ResponseModel(false,"User already exists");
         }
 
-        userDao.AddUser(new User(email,password,bitmap, Constants.User));
+        Dao.userDao().AddUser(new User(email,password,bitmap, Constants.User));
+        user = Dao.userDao().GetUser(email);
+        Dao.cartDao().AddCart(new Cart(user.getId()));
         return new ResponseModel(true,"Add user success");
 
     }
 
     public User GetUser(String username){
-        return userDao.GetUser(username);
+        return Dao.userDao().GetUser(username);
     }
 
     public ResponseModel UpdateUser(User user){
         try {
-            userDao.updateUser(user);
+            Dao.userDao().updateUser(user);
             return new ResponseModel(true,"Update user info success");
         }
         catch (Exception ex){

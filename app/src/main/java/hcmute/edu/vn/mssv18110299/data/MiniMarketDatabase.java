@@ -26,7 +26,7 @@ import hcmute.edu.vn.mssv18110299.data.dao.UserDao;
         ItemCategory.class,
         Role.class,
         CartItem.class},
-        version=3)
+        version=4)
 public abstract class MiniMarketDatabase extends RoomDatabase {
     // Database name to be used
     public static final String NAME = "MiniMarketDatabase.db";
