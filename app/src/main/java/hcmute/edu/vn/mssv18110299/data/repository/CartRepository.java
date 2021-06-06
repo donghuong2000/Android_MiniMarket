@@ -3,6 +3,8 @@ package hcmute.edu.vn.mssv18110299.data.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import hcmute.edu.vn.mssv18110299.data.Bill;
+import hcmute.edu.vn.mssv18110299.data.BillItem;
 import hcmute.edu.vn.mssv18110299.data.Cart;
 import hcmute.edu.vn.mssv18110299.data.CartItem;
 import hcmute.edu.vn.mssv18110299.data.Item;
@@ -79,5 +81,23 @@ public class CartRepository {
             return new ResponseModel(false,ex.getMessage());
         }
 
+    }
+    public ResponseModel checkout(String email) {
+        User user = db.userDao().GetUser(email);
+        ArrayList<CartItem> cartItems =  GetCartUser(email);
+        if(cartItems.size() > 0){
+            double total = cartItems.stream().mapToDouble(item -> item.getItem().getPrice()*item.getNum()).sum();
+            Bill bill = new Bill(user.getId(), (float) total);
+            int billId = (int) db.billDao().AddBillInt(bill);
+            cartItems.forEach(item ->{
+                BillItem bi = new BillItem(billId,item.getItemId(),item.getNum());
+                db.billItemDao().AddBillItem(bi);
+            });
+            cartItems.forEach(item -> db.cartItemDao().DeleteCartItem(item));
+            return new ResponseModel(true,"Create Bill Success");
+        }
+        else{
+            return new ResponseModel(false,"Create Bill Failure");
+        }
     }
 }

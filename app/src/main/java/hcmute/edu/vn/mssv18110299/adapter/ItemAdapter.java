@@ -22,6 +22,7 @@ import hcmute.edu.vn.mssv18110299.data.Item;
 import hcmute.edu.vn.mssv18110299.data.Store;
 import hcmute.edu.vn.mssv18110299.data.model.ResponseModel;
 import hcmute.edu.vn.mssv18110299.data.repository.CartRepository;
+import hcmute.edu.vn.mssv18110299.utilities.ImageSaver;
 import hcmute.edu.vn.mssv18110299.utilities.Session;
 
 
@@ -29,9 +30,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private Context context;
     private ArrayList<Item> items;
+    private ImageSaver imageSaver;
     public ItemAdapter(Context context, ArrayList<Item> items) {
         this.context = context;
         this.items = items;
+        imageSaver = new ImageSaver(context);
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -47,6 +50,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             name = itemView.findViewById(R.id.storeName);
             location = itemView.findViewById(R.id.location);
             voteScore = itemView.findViewById(R.id.voteScore);
+            image = itemView.findViewById((R.id.item_card_image));
         }
 
     }
@@ -64,7 +68,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Item item = items.get(position);
-        //ToDO load image for Recycle View
+        holder.image.setImageBitmap(imageSaver.load(item.getImgUrl()));
 
         // add event
         holder.name.setText(item.getName());

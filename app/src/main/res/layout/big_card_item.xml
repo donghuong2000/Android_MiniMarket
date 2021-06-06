@@ -17,7 +17,7 @@
 
             <!-- Media -->
             <ImageView
-                android:id="@+id/iamgeView"
+                android:id="@+id/store_image"
                 android:layout_width="match_parent"
                 android:layout_height="107dp"
                 android:scaleType="centerCrop"

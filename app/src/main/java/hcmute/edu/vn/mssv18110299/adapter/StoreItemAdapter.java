@@ -19,6 +19,7 @@ import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.data.Item;
 import hcmute.edu.vn.mssv18110299.data.model.ResponseModel;
 import hcmute.edu.vn.mssv18110299.data.repository.CartRepository;
+import hcmute.edu.vn.mssv18110299.utilities.ImageSaver;
 import hcmute.edu.vn.mssv18110299.utilities.Session;
 
 public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.ViewHolder> {
@@ -62,7 +63,7 @@ public class StoreItemAdapter extends RecyclerView.Adapter<StoreItemAdapter.View
         Item item = items.get(position);
         holder.itemName.setText(item.getName());
         holder.itemPrice.setText(String.valueOf(item.getPrice()));
-        //todo: Load image
+        holder.itemImage.setImageBitmap(new ImageSaver(context).load(item.getImgUrl()));
         holder.btnPlus.setOnClickListener(v-> {
             //addToCart
             String username =  new Session(context).getUsername();

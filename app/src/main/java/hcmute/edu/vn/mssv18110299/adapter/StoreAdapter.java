@@ -21,15 +21,18 @@ import hcmute.edu.vn.mssv18110299.data.Store;
 import hcmute.edu.vn.mssv18110299.data.repository.ItemRepository;
 import hcmute.edu.vn.mssv18110299.data.repository.StoreRepository;
 import hcmute.edu.vn.mssv18110299.fragment.StoreFragment;
+import hcmute.edu.vn.mssv18110299.utilities.ImageSaver;
 
 public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> {
 
     private Context context;
     private ArrayList<Store> stores;
+    private ImageSaver imageSaver;
 
     public  StoreAdapter(Context context,ArrayList<Store> stores){
         this.context = context;
         this.stores = stores;
+        imageSaver = new ImageSaver(context);
 
     }
 
@@ -46,6 +49,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
             name = itemView.findViewById(R.id.storeName);
             location = itemView.findViewById(R.id.location);
             voteScore = itemView.findViewById(R.id.voteScore);
+            image = itemView.findViewById(R.id.store_image);
         }
     }
 
@@ -61,7 +65,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Store store = stores.get(position);
-        //ToDO load image for Recycle View
+        holder.image.setImageBitmap(imageSaver.load(store.getImgUrl()));
         holder.name.setText(store.getName());
         holder.voteScore.setText(String.valueOf(store.getVotedScore()));
         holder.location.setText("1");
