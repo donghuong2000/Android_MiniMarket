@@ -7,12 +7,20 @@ import androidx.room.PrimaryKey;
 @Entity(foreignKeys = @ForeignKey(entity = User.class,parentColumns = "Id",childColumns = "Id"))
 public class Cart {
     @PrimaryKey
-    public int Id;
+    private int  Id;
 
     public Cart(int id) {
         Id = id;
     }
 
     public Cart() {
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 }

@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
@@ -17,6 +21,7 @@ import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.adapter.CartItemAdapter;
 import hcmute.edu.vn.mssv18110299.data.CartItem;
 import hcmute.edu.vn.mssv18110299.data.Item;
+import hcmute.edu.vn.mssv18110299.data.model.ResponseModel;
 import hcmute.edu.vn.mssv18110299.data.repository.CartRepository;
 import hcmute.edu.vn.mssv18110299.utilities.Session;
 
@@ -28,7 +33,7 @@ public class CartFragment extends Fragment {
     private CartItemAdapter cartItemAdapter;
     private CartRepository cartRepository;
     private TextView subtotal,deliveryFee,total;
-
+    private MaterialButton btn_checkout;
     public CartFragment() {
         // Required empty public constructor
     }
@@ -58,6 +63,30 @@ public class CartFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         cartItemRecycle.setLayoutManager(llm);
         cartItemRecycle.setAdapter(cartItemAdapter);
+        btn_checkout = view.findViewById(R.id.btn_checkout);
+        btn_checkout.setOnClickListener(v->new MaterialAlertDialogBuilder(getContext(),R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+                .setTitle("Pay an order")
+                .setMessage("Do you want pay this bill")
+                .setNegativeButton("Cancel",((dialog, which) -> {
+                    //do
+                }))
+                .setPositiveButton("CheckOut", (dialog, which) -> {
+                    //CheckOut
+                    ResponseModel md = new CartRepository().checkout(new Session(getContext()).getUsername());
+                    Toast.makeText(getContext(),md.message,Toast.LENGTH_LONG).show();
+                    if(md.isSuccess){
+                       //todo: redirect bill
+                        cartItems.clear();
+                        cartItemAdapter.notifyDataSetChanged();
+                    }
+                    else {
+                        // do nothing
+                    }
+
+                })
+                .show());
+
+
         return view;
     }
 

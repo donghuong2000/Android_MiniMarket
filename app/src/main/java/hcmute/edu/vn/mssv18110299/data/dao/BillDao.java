@@ -18,6 +18,9 @@ public interface  BillDao {
     // insert Bill
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void AddBill(Bill Bill);
+    // insert Bill
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    long AddBillInt(Bill Bill);
     // get all Bill
     @Query(value = "SELECT * FROM Bill ORDER BY Id")
     List<Bill> GetAllBills();

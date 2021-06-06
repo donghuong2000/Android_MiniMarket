@@ -48,9 +48,9 @@ public class BillItemAdapter extends RecyclerView.Adapter<BillItemAdapter.ViewHo
     @Override
     public void onBindViewHolder( @NotNull BillItemAdapter.ViewHolder holder, int position) {
             Bill item = bills.get(position);
-            holder.orderId.setText(String.valueOf(item.Id));
-            holder.dateCreate.setText(item.DateCreate.toString());
-            holder.totalPrice.setText(String.valueOf(item.Total));
+            holder.orderId.setText("#"+String.valueOf(item.getId()));
+            holder.dateCreate.setText(item.getDateCreate().toString());
+            holder.totalPrice.setText(String.valueOf(item.getTotal()));
     }
 
     @Override
