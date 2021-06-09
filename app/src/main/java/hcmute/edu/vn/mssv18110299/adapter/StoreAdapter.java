@@ -68,7 +68,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         holder.image.setImageBitmap(imageSaver.load(store.getImgUrl()));
         holder.name.setText(store.getName());
         holder.voteScore.setText(String.valueOf(store.getVotedScore()));
-        holder.location.setText("1");
+        holder.location.setText("");
         holder.itemView.setOnClickListener(v->{
             AppCompatActivity appCompatActivity =(AppCompatActivity)v.getContext();
             store.setItems(new StoreRepository().GetItemsAll(store.getId()));
