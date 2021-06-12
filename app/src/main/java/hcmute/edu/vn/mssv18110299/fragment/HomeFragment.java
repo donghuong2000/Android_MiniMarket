@@ -6,18 +6,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import hcmute.edu.vn.mssv18110299.HomeActivity;
 import hcmute.edu.vn.mssv18110299.R;
 import hcmute.edu.vn.mssv18110299.adapter.ItemAdapter;
 import hcmute.edu.vn.mssv18110299.adapter.StoreAdapter;
+import hcmute.edu.vn.mssv18110299.data.Category;
 import hcmute.edu.vn.mssv18110299.data.Item;
 import hcmute.edu.vn.mssv18110299.data.Store;
+import hcmute.edu.vn.mssv18110299.data.repository.CategoryRepository;
 import hcmute.edu.vn.mssv18110299.data.repository.ItemRepository;
 import hcmute.edu.vn.mssv18110299.data.repository.StoreRepository;
 
@@ -37,12 +44,12 @@ public class HomeFragment extends Fragment {
     private ItemAdapter itemAdapter;
     private ArrayList<Item> items;
     private ItemRepository itemRepository;
-
+    private int currentTab = -1;
     private ArrayList<Store> stores;
     private RecyclerView recyclerStore;
     private StoreAdapter storeAdapter;
     private StoreRepository storeRepository;
-
+    private TabLayout tabLayoutCategory;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -82,8 +89,50 @@ public class HomeFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerStore.setLayoutManager(llm);
         recyclerStore.setAdapter(storeAdapter);
+        TabLayoutSetting(view);
 
 
         return view;
+    }
+
+    private void TabLayoutSetting(View view){
+        tabLayoutCategory = view.findViewById(R.id.tab_category);
+        ArrayList<Category> categories = new CategoryRepository().GetAll();
+
+        TabLayout.Tab tabInit = tabLayoutCategory.newTab().setText("ALL");
+        tabInit.setTag(-1);
+        tabLayoutCategory.addTab(tabInit);// init tab all
+        categories.forEach(item -> {
+            TabLayout.Tab tab = tabLayoutCategory.newTab();
+            tab.setText(item.getName());
+            tab.setTag(item.getId());
+            tabLayoutCategory.addTab(tab);
+            tabLayoutCategory.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+
+                    int tabId =(int) tab.getTag();
+                    if(tabId != currentTab)
+                    {
+                        currentTab = tabId;
+                        items = itemRepository.GetAll(tabId);
+                        itemAdapter = new ItemAdapter(getContext(),items);
+                        recyclerItem.swapAdapter(itemAdapter,false);
+                    }
+
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+
+            });
+        });
     }
 }

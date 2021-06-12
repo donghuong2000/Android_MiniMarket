@@ -73,7 +73,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         // add event
         holder.name.setText(item.getName());
         holder.voteScore.setText(String.valueOf(item.getVotedScore()));
-        holder.location.setText("1");
+        holder.location.setText("$ "+item.getPrice());
         holder.itemView.setOnClickListener(v-> new MaterialAlertDialogBuilder(context,R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle("Add to Cart")
                 .setMessage("Do you want add this item in your Cart")

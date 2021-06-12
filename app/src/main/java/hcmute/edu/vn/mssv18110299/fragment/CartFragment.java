@@ -75,7 +75,8 @@ public class CartFragment extends Fragment {
                     ResponseModel md = new CartRepository().checkout(new Session(getContext()).getUsername());
                     Toast.makeText(getContext(),md.message,Toast.LENGTH_LONG).show();
                     if(md.isSuccess){
-                       //todo: redirect bill
+                        subtotal.setText(0 + " $");
+                        total.setText(0 +" $");
                         cartItems.clear();
                         cartItemAdapter.notifyDataSetChanged();
                     }

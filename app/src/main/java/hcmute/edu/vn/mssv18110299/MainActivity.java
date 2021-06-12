@@ -21,7 +21,7 @@ import hcmute.edu.vn.mssv18110299.data.repository.UserRepository;
 import hcmute.edu.vn.mssv18110299.utilities.Session;
 import io.reactivex.rxjava3.core.Single;
 
-public class  MainActivity extends AppCompatActivity {
+public class   MainActivity extends AppCompatActivity {
 
     UserRepository userRepository;
     TextView ForgotPasswordBtn;

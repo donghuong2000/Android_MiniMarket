@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void Validate() {
         String avatarImage = "";
         if(avatarBitmap!=null){
-            imageSaver.save(avatarBitmap,username.getText().toString());
+            imageSaver.save(avatarBitmap,username.getText().toString()+".png");
             avatarImage = username.getText().toString();
         }
         ResponseModel response = userRepository.Register(username.getText().toString(),password.getText().toString(),confirmPassword.getText().toString(),avatarImage);
