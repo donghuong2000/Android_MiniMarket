@@ -96,6 +96,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
                              new CartRepository().deleteFromCart(ci);
                              this.notifyItemRemoved(position);
                              this.notifyItemRangeChanged(position, cartItems.size());
+                             UpdateCart();
                          })
                          .show();
              }
